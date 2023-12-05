@@ -1,1 +1,16 @@
-C:\Users\Master\Development\todo-app\src\todo-item\todo-complete-button\todo-complete-button.tsx
+import React from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { TodoItemProps } from "../todo-item";
+
+type TodoDeleteButtonProps = {
+  itemId: number | string;
+  onDelete?: (id: number | string) => TodoItemProps
+};
+
+const TodoDeleteButton = (props: TodoDeleteButtonProps) => (
+  <button className="w-8 h-8 bg-red-600 text-gray-200 rounded-full grid place-items-center" onClick={() => props.onDelete}>
+    <FaRegTrashAlt />
+  </button>
+);
+
+export default TodoDeleteButton;
