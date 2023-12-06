@@ -1,6 +1,6 @@
 import React from "react";
 import { CreateTodo } from "../create-todo-box";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 type CreateTodoBoxConfirmButtonProps = {
   createTodo?: CreateTodo;
@@ -16,8 +16,8 @@ const handleClick = ({ onClick, createTodo }: CreateTodoBoxConfirmButtonProps) =
 };
 
 const CreateTodoBoxConfirmButton = (props: CreateTodoBoxConfirmButtonProps) => (
-  <button className="grid place-items-center bg-slate-400 text-gray-600 rounded-xl" onClick={() => handleClick(props)}>
-    <FaPlusCircle />
+  <button className="grid place-items-center bg-emerald-600 border-none outline-none text-gray-200 rounded-xl w-12 h-12 transition hover:bg-emerald-700" onClick={() => handleClick(props)}>
+    <FaPlus />
   </button>
 );
 
