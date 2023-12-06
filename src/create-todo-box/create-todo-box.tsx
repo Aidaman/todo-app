@@ -33,6 +33,8 @@ const CreateTodoBox = (props: Props) => {
   const handleCreateTodoClick = (value: CreateTodo): void => {
     if (!props.createTodoClick) return;
 
+    if (todoText.length === 0 || todoDueTo.length === 0) return;
+
     props.createTodoClick!({
       todoText,
       todoDueTo,
