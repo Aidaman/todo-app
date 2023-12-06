@@ -1,5 +1,5 @@
 import "./App.css";
-import TodoItem from "./todo-item/todo-item";
+import CreateTodoBox from "./create-todo-box/create-todo-box";
 import { TodoItemProps } from "./todo-item/todo-item";
 import TodoList from "./todo-list/todo-list";
 
@@ -33,7 +33,8 @@ function App() {
 
   return (
     <>
-      <TodoList todos={[]}/>
+      <CreateTodoBox /> 
+      <TodoList todos={todoProps}/>
     </>
   );
 }

@@ -46,7 +46,7 @@ const TodoList = (props: TodoListProps) => {
   return (
     <ul className="flex flex-col gap-2 px-12 py-2">
       {props.todos.map((item) => (
-        <li key={item.id}>
+        <li key={item.id} className="odd:bg-neutral-50 even:bg-gray-100 rounded-xl">
           <TodoItem
             id={item.id}
             createdAt={item.createdAt}

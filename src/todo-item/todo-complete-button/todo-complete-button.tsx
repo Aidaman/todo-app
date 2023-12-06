@@ -15,7 +15,7 @@ const handleOnComplete = ({ onComplete, itemId }: TodoCompleteButtonProps) => {
 
 const TodoCompleteButton = (props: TodoCompleteButtonProps) => (
   <button
-    className="w-8 h-8 bg-green-600 text-gray-200 rounded-full grid place-items-center"
+    className="w-8 h-8 bg-green-600 text-gray-50 transition-all hover:bg-green-700 rounded-full grid place-items-center"
     onClick={() => handleOnComplete(props)}
   >
     <FaCheck />
