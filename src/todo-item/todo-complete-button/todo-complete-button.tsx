@@ -1,13 +1,14 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import { TodoItemProps } from "../todo-item";
 
 type TodoCompleteButtonProps = {
   itemId: number | string;
-  onComplete?: (itemId: number | string) => TodoItemProps;
+  onComplete?: (itemId: number | string) => void;
 };
 
 const handleOnComplete = ({ onComplete, itemId }: TodoCompleteButtonProps) => {
+  console.log('SHIT');
+  
   if (!onComplete) return;
 
   onComplete!(itemId);
@@ -16,7 +17,7 @@ const handleOnComplete = ({ onComplete, itemId }: TodoCompleteButtonProps) => {
 const TodoCompleteButton = (props: TodoCompleteButtonProps) => (
   <button
     className="w-8 h-8 bg-green-600 text-gray-50 transition-all hover:bg-green-700 rounded-full grid place-items-center"
-    onClick={() => handleOnComplete(props)}
+    onClick={() => props.onComplete!(props.itemId)}
   >
     <FaCheck />
   </button>

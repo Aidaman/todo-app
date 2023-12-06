@@ -8,6 +8,12 @@ export type CreateTodo = {
   todoDueTo: string;
 };
 
+//* While CreateTodo require only text and due to date, the DTO for update can have any fields that model has 
+export type UpdateTodo = {
+  todoText?: string;
+  todoDueTo?: string;
+};
+
 type Props = {
   createTodoClick?: (createTodo: CreateTodo) => void;
 };

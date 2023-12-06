@@ -12,8 +12,8 @@ export type TodoItemProps = {
   dueTo: Date;
   title: string;
 
-  onComplete?: (id: number | string) => TodoItemProps;
-  onDelete?: (id: number | string) => TodoItemProps;
+  onComplete?: (id: number | string) => void;
+  onDelete?: (id: number | string) => void;
   onUpdate?: (
     id: number | string,
     update: TodoItemProps
