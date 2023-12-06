@@ -16,7 +16,7 @@ const handleClick = ({ onClick, createTodo }: CreateTodoBoxConfirmButtonProps) =
 };
 
 const CreateTodoBoxConfirmButton = (props: CreateTodoBoxConfirmButtonProps) => (
-  <button className="grid place-items-center bg-emerald-600 border-none outline-none text-gray-200 rounded-xl w-12 h-12 transition hover:bg-emerald-700" onClick={() => handleClick(props)}>
+  <button className="grid place-items-center bg-emerald-600 border-none outline-none text-gray-50 rounded-xl flex-grow p-4 transition hover:bg-emerald-700" onClick={() => handleClick(props)}>
     <FaPlus />
   </button>
 );
