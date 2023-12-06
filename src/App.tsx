@@ -1,40 +1,47 @@
+import { useState } from "react";
 import "./App.css";
-import CreateTodoBox from "./create-todo-box/create-todo-box";
+import CreateTodoBox, { CreateTodo } from "./create-todo-box/create-todo-box";
 import { TodoItemProps } from "./todo-item/todo-item";
 import TodoList from "./todo-list/todo-list";
 
 function App() {
-  let todoProps: TodoItemProps[] = [
-    {
-      id: 1,
+  const [todos, setTodos] = useState(new Array<TodoItemProps>());
+  const [newTodoId, setNewTodoId] = useState(todos.length);
+
+  const addNewTodo = (createTodo: CreateTodo) => {
+    setNewTodoId( currentNewTodoId => currentNewTodoId + 1 );
+    console.log(newTodoId);
+    
+    const newTodo: TodoItemProps = {
+      id: newTodoId,
       createdAt: new Date(),
       updatedAt: new Date(),
-      dueTo: new Date(2024, 12, 31),
       isCompleted: false,
-      title: "Todo 1",
-    },
-    {
-      id: 2,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      dueTo: new Date(2024, 12, 31),
-      isCompleted: false,
-      title: "Todo 2",
-    },
-    {
-      id: 3,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      dueTo: new Date(2024, 12, 31),
-      isCompleted: false,
-      title: "Todo 3",
-    },
-  ];
+      dueTo: new Date(createTodo.todoDueTo),
+      title: createTodo.todoText,
+    }
+
+    setTodos( current => [...current, newTodo] );
+  }
+
+  const removeTodo = (id: string | number) => {
+    const item = todos.find(x => x.id === id);
+    if (!item)
+      throw new Error(
+        "Can not delete Todo that does not exist or does not belongs to the current user"
+      );
+
+    setTodos( current => current.filter(x => x.id !== id) );
+  }
+
+  const completeTodo = (id: string | number) => {
+    setTodos( current => current.map(x => x.id !== id ? x : { ...x, isCompleted: true }) );
+  }
 
   return (
     <>
-      <CreateTodoBox /> 
-      <TodoList todos={todoProps}/>
+      <CreateTodoBox createTodoClick={addNewTodo} /> 
+      <TodoList todos={todos} onDelete={removeTodo} onComplete={completeTodo}/>
     </>
   );
 }
