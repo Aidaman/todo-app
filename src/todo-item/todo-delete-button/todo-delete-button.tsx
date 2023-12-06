@@ -8,7 +8,7 @@ type TodoDeleteButtonProps = {
 };
 
 const TodoDeleteButton = (props: TodoDeleteButtonProps) => (
-  <button className="w-8 h-8 bg-red-600 text-gray-200 rounded-full grid place-items-center" onClick={() => props.onDelete}>
+  <button className="w-8 h-8 bg-red-600 transition-all hover:bg-red-700 text-gray-50 rounded-full grid place-items-center" onClick={() => props.onDelete}>
     <FaRegTrashAlt />
   </button>
 );

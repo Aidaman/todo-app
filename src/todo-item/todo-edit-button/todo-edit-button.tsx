@@ -18,7 +18,7 @@ const handleOnUpdate = ({ itemId, onUpdate, updateItemProps }: TodoEdtiButtonPro
 }
 
 const TodoEditButton = (props: TodoEdtiButtonProps) => (
-  <button className="w-8 h-8 bg-yellow-400 text-gray-800 rounded-full grid place-items-center" onClick={() => handleOnUpdate(props)}>
+  <button className="w-8 h-8 bg-yellow-400 transition-all hover:bg-yellow-500 text-gray-800 rounded-full grid place-items-center" onClick={() => handleOnUpdate(props)}>
     <FaEdit />
   </button>
 );

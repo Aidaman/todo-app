@@ -21,7 +21,7 @@ const CreateTodoBoxTextInput = (props: CreateTodoBoxTextInputProps) => {
 
   return (
     <input
-      className="py-1 px-4 border-none outline-none rounded-xl block w-full bg-gray-100 text-gray-700"
+      className="py-1 px-4 border-none outline-none rounded-xl block w-full bg-gray-100 text-gray-700 transition-all hover:shadow-md"
       type="text"
       placeholder={props.placeholder}
       onInput={handleInput}
