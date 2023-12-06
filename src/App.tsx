@@ -1,6 +1,5 @@
 import "./App.css";
-import CreateTodoBoxConfirmButton from "./create-todo-box/create-todo-box-confirm-button/create-todo-box-confirm-button";
-import TodoItem from "./todo-item/todo-item";
+import CreateTodoBox from "./create-todo-box/create-todo-box";
 import { TodoItemProps } from "./todo-item/todo-item";
 import TodoList from "./todo-list/todo-list";
 
@@ -34,8 +33,8 @@ function App() {
 
   return (
     <>
-      <CreateTodoBoxConfirmButton/> 
-      <TodoList todos={[]}/>
+      <CreateTodoBox /> 
+      <TodoList todos={todoProps}/>
     </>
   );
 }
