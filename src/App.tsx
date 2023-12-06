@@ -10,7 +10,6 @@ function App() {
 
   const addNewTodo = (createTodo: CreateTodo) => {
     setNewTodoId( currentNewTodoId => currentNewTodoId + 1 );
-    console.log(newTodoId);
     
     const newTodo: TodoItemProps = {
       id: newTodoId,
@@ -19,6 +18,8 @@ function App() {
       isCompleted: false,
       dueTo: new Date(createTodo.todoDueTo),
       title: createTodo.todoText,
+      onComplete: (id: string | number) => {},
+      onDelete: (id: string | number) => {}
     }
 
     setTodos( current => [...current, newTodo] );

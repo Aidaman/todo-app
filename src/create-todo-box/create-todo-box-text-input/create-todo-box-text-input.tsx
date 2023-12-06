@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 
 type CreateTodoBoxTextInputProps = {
   placeholder?: string;
-  onInput?: (value: string) => void;
+  onInput: (value: string) => void;
 };
 
 const CreateTodoBoxTextInput = (props: CreateTodoBoxTextInputProps) => {
@@ -11,9 +11,7 @@ const CreateTodoBoxTextInput = (props: CreateTodoBoxTextInputProps) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
 
-    if (!props.onInput) return;
-
-    props!.onInput(event.target.value);
+    props.onInput(event.target.value);
   };
 
   return (

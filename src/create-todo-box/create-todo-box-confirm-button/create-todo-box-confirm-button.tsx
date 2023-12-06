@@ -3,15 +3,11 @@ import { CreateTodo } from "../create-todo-box";
 import { FaPlus } from "react-icons/fa";
 
 type CreateTodoBoxConfirmButtonProps = {
-  createTodo?: CreateTodo;
-  onClick?: (createTodo: CreateTodo) => void;
+  createTodo: CreateTodo;
+  onClick: (createTodo: CreateTodo) => void;
 };
 
 const handleClick = ({ onClick, createTodo }: CreateTodoBoxConfirmButtonProps) => {
-  if (!onClick) return;
-
-  if (!createTodo) return;
-
   onClick!(createTodo);
 };
 

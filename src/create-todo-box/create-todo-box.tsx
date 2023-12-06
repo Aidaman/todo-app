@@ -15,7 +15,7 @@ export type UpdateTodo = {
 };
 
 type Props = {
-  createTodoClick?: (createTodo: CreateTodo) => void;
+  createTodoClick: (createTodo: CreateTodo) => void;
 };
 
 const CreateTodoBox = (props: Props) => {
@@ -31,8 +31,6 @@ const CreateTodoBox = (props: Props) => {
   };
 
   const handleCreateTodoClick = (value: CreateTodo): void => {
-    if (!props.createTodoClick) return;
-
     if (todoText.length === 0 || todoDueTo.length === 0) return;
 
     props.createTodoClick!({
