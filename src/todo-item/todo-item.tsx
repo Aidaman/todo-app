@@ -22,7 +22,7 @@ export type TodoItemProps = {
 
 //TODO: Work on idea of OnUpdate more properly
 const TodoItem = (props: TodoItemProps): JSX.Element => (
-  <div className="rounded-xl bg-neutral-200 shadow-sm odd·:bg-gray-400 px-8 py-2 grid grid-cols-2">
+  <div className="rounded-xl transition-all shadow-md px-8 py-2 grid grid-cols-2 hover:shadow-lg">
     <span className="font-sans text-base font-normal">{props.title}</span>
     <div className="buttons flex gap-2 ml-auto">
       <TodoCompleteButton onComplete={props.onComplete} itemId={props.id} />
