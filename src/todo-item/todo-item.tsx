@@ -14,10 +14,7 @@ export type TodoItemProps = {
 
   onComplete: (id: number | string) => void;
   onDelete: (id: number | string) => void;
-  onUpdate?: (
-    id: number | string,
-    update: TodoItemProps
-  ) => TodoItemProps;
+  onUpdate: (editTodo?: TodoItemProps) => void;
 };
 
 const getDate = (dueTo: Date): React.ReactNode => {
@@ -38,10 +35,10 @@ const TodoItem = (props: TodoItemProps): JSX.Element => (
       {
         props.isCompleted ? null : <TodoCompleteButton onComplete={props.onComplete} itemId={props.id} />
       }
+      {
+        props.isCompleted ? null : <TodoEditButton onUpdate={props.onUpdate} itemId={props.id} updateItemProps={props} />
+      }
       <TodoDeleteButton onDelete={props.onDelete} itemId={props.id} />
-      {/* {
-        props.isCompleted ? null : <TodoEditButton  onUpdate={props.onUpdate} itemId={props.id} updateItemProps={props} />
-      } */}
     </div>
     </div>
   </div>
