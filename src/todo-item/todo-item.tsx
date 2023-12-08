@@ -20,12 +20,18 @@ export type TodoItemProps = {
   ) => TodoItemProps;
 };
 
-//TODO: Work on idea of OnUpdate more properly
+const getDate = (dueTo: Date): React.ReactNode => {
+  if (!(dueTo instanceof Date)) {
+    return new Date(dueTo).toLocaleString();  
+  }
+  return dueTo.toLocaleString();  
+}
+
 const TodoItem = (props: TodoItemProps): JSX.Element => (
   <div className="rounded-xl transition-all shadow-md px-8 py-2 grid grid-cols-2 hover:shadow-lg">
     <div className="flex flex-col">
       <span className="font-sans text-base font-normal">{props.title}</span>
-      <span className="font-sans text-xs font-extralight">{props.dueTo.toLocaleDateString()}</span>
+      <span className="font-sans text-xs font-extralight">{getDate(props.dueTo)}</span>
     </div>
     <div className="buttons flex gap-2 ml-auto">
     <div className="buttons flex gap-2 ml-auto">
@@ -33,9 +39,9 @@ const TodoItem = (props: TodoItemProps): JSX.Element => (
         props.isCompleted ? null : <TodoCompleteButton onComplete={props.onComplete} itemId={props.id} />
       }
       <TodoDeleteButton onDelete={props.onDelete} itemId={props.id} />
-      {
+      {/* {
         props.isCompleted ? null : <TodoEditButton  onUpdate={props.onUpdate} itemId={props.id} updateItemProps={props} />
-      }
+      } */}
     </div>
     </div>
   </div>
