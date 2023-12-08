@@ -14,11 +14,11 @@ export type UpdateTodo = {
   todoDueTo?: string;
 };
 
-type Props = {
+type CreateTodoBoxProps = {
   createTodoClick: (createTodo: CreateTodo) => void;
 };
 
-const CreateTodoBox = (props: Props) => {
+const CreateTodoBox = (props: CreateTodoBoxProps) => {
   const [todoText, setTodoText] = useState("");
   const [todoDueTo, setTodoDueTo] = useState("");
 
