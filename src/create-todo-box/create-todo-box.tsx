@@ -14,9 +14,7 @@ export type UpdateTodo = {
   todoDueTo?: string;
 };
 
-type CreateTodoBoxProps = {
-  createTodoClick: (createTodo: CreateTodo) => void;
-};
+type CreateTodoBoxProps = {};
 
 const CreateTodoBox = (props: CreateTodoBoxProps) => {
   const [todoText, setTodoText] = useState("");
@@ -30,15 +28,6 @@ const CreateTodoBox = (props: CreateTodoBoxProps) => {
     setTodoDueTo(value);
   };
 
-  const handleCreateTodoClick = (value: CreateTodo): void => {
-    if (todoText.length === 0 || todoDueTo.length === 0) return;
-
-    props.createTodoClick!({
-      todoText,
-      todoDueTo,
-    });
-  };
-
   return (
     <div className="flex w-2/3 mx-auto my-4 gap-2">
       <CreateTodoBoxTextInput
@@ -46,7 +35,7 @@ const CreateTodoBox = (props: CreateTodoBoxProps) => {
         placeholder="Task that you need to complete"
       />
       <CreateTodoBoxDateInput onChange={handleTodoDueToChange} />
-      <CreateTodoBoxConfirmButton onClick={handleCreateTodoClick} createTodo={{todoText, todoDueTo}} />
+      <CreateTodoBoxConfirmButton createTodo={{todoText, todoDueTo}} />
     </div>
   );
 };

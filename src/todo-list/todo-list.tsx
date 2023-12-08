@@ -5,8 +5,6 @@ import classNames from "classnames";
 
 type TodoListProps = {
   todos: TodoItemProps[];
-  onComplete: (id: number | string) => void;
-  onDelete: (id: number | string) => void;
 };
 
 const defineClassNames = (todo: TodoItemProps): string => classNames(todo.isCompleted ? 'bg-green-200' : 'odd:bg-neutral-50 even:bg-gray-100', 'rounded-xl');
@@ -29,8 +27,6 @@ const TodoList = (props: TodoListProps) => {
             isCompleted={item.isCompleted}
             dueTo={item.dueTo}
             title={item.title}
-            onComplete={props.onComplete}
-            onDelete={props.onDelete}
           />
         </li>
       ))}
