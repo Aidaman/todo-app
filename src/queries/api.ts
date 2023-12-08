@@ -1,7 +1,10 @@
+import { QueryClient } from "@tanstack/react-query";
 import { CreateTodo } from "../create-todo-box/create-todo-box";
 import { TodoItemProps } from "../todo-item/todo-item";
 
 export default class TodoService {
+  public static queryClient: QueryClient = new QueryClient();
+
   public static getTodos(): TodoItemProps[] {
     const localstorageTodos: string | null = localStorage.getItem("todos");
     if (!localstorageTodos) {
@@ -13,6 +16,14 @@ export default class TodoService {
   }
 
   public static addNewTodo(createTodo: CreateTodo): void {
+    if (createTodo.todoText.trim().length < 1) {
+      return;
+    }
+
+    if (!createTodo.todoDueTo) {
+      createTodo.todoDueTo = new Date().toString();
+    }
+
     const localstorageTodos: string | null = localStorage.getItem("todos");
     if (!localstorageTodos) {
       localStorage.setItem("todos", JSON.stringify([]));
@@ -32,10 +43,8 @@ export default class TodoService {
       createdAt: new Date(),
       updatedAt: new Date(),
       isCompleted: false,
-      dueTo: new Date(createTodo.todoDueTo),
+      dueTo: new Date(createTodo.todoDueTo ?? ""),
       title: createTodo.todoText,
-      onComplete: (id: string | number) => {},
-      onDelete: (id: string | number) => {},
     };
 
     localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));

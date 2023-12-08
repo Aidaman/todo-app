@@ -1,48 +1,28 @@
-import { useState } from "react";
 import "./App.css";
-import CreateTodoBox, { CreateTodo } from "./create-todo-box/create-todo-box";
-import { TodoItemProps } from "./todo-item/todo-item";
+import CreateTodoBox from "./create-todo-box/create-todo-box";
 import TodoList from "./todo-list/todo-list";
+import TodoService from "./queries/api";
+import { useQuery } from "@tanstack/react-query";
+import TodoListEmpty from "./todo-list/todo-list-empty/todo-list-empty";
 
 function App() {
-  const [todos, setTodos] = useState(new Array<TodoItemProps>());
-  const [newTodoId, setNewTodoId] = useState(todos.length);
-
-  const addNewTodo = (createTodo: CreateTodo) => {
-    setNewTodoId( currentNewTodoId => currentNewTodoId + 1 );
-    
-    const newTodo: TodoItemProps = {
-      id: newTodoId,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      isCompleted: false,
-      dueTo: new Date(createTodo.todoDueTo),
-      title: createTodo.todoText,
-      onComplete: (id: string | number) => {},
-      onDelete: (id: string | number) => {}
-    }
-
-    setTodos( current => [...current, newTodo] );
-  }
-
-  const removeTodo = (id: string | number) => {
-    const item = todos.find(x => x.id === id);
-    if (!item)
-      throw new Error(
-        "Can not delete Todo that does not exist or does not belongs to the current user"
-      );
-
-    setTodos( current => current.filter(x => x.id !== id) );
-  }
-
-  const completeTodo = (id: string | number) => {
-    setTodos( current => current.map(x => x.id !== id ? x : { ...x, isCompleted: true }) );
-  }
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ["todos", localStorage],
+    queryFn: () => TodoService.getTodos(),
+  });
 
   return (
     <>
-      <CreateTodoBox createTodoClick={addNewTodo} /> 
-      <TodoList todos={todos} onDelete={removeTodo} onComplete={completeTodo}/>
+      <CreateTodoBox />
+      {isLoading ? (
+        <TodoListEmpty message={"Loading..."} />
+      ) : isError ? (
+        <TodoListEmpty message={"Apparently, somthing went wrong"} />
+      ) : (
+        <TodoList
+          todos={data!}
+        />
+      )}
     </>
   );
 }
