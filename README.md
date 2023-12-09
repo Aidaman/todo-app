@@ -7,7 +7,7 @@ This project is a Test Task for Midstem
 - [x] Create todo
 - [x] Check todo is completed
 - [x] Delete todo
-- [ ] Update todo
+- [x] Update todo
 - [x] styling using tailwind only
 - [ ] state management using react-query
 
