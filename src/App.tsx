@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import CreateTodoBox, { CreateTodo } from "./create-todo-box/create-todo-box";
 import TodoList from "./todo-list/todo-list";
-import TodoService from "./queries/api";
+import TodoService from "./shared/queries/api";
 import EditTodoDialog from "./edit-todo-dialog/edit-todo-dialog";
 import { TodoItemProps } from "./todo-item/todo-item";
 
