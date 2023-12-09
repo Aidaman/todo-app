@@ -5,7 +5,7 @@ import TodoService from "./shared/queries/api";
 import EditTodoDialog from "./edit-todo-dialog/edit-todo-dialog";
 import { TodoItemProps } from "./todo-item/todo-item";
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import TodoListEmpty from "./todo-list/todo-list-empty/todo-list-empty";
 
 function App() {
@@ -16,6 +16,11 @@ function App() {
   const { isError, isLoading, data } = useQuery({
     queryKey: ["todos"],
     queryFn: TodoService.getTodos,
+  });
+
+  // When we rejecting update changes we does not mutate anything, so no need for mutation for this case 
+  const updateConfirmMutation = useMutation({
+    mutationFn: (updateTodo: TodoItemProps) => new Promise(() => updateConfirm(updateTodo)),
   });
 
   const addNewTodo = (createTodo: CreateTodo) => {
@@ -39,6 +44,7 @@ function App() {
   };
 
   const updateConfirm = (updatedTodo: TodoItemProps) => {
+    // updateConfirmMutation.mutate(updatedTodo);
     TodoService.editTodo(updatedTodo);
     setTodos(TodoService.getTodos());
     setIsDialogOpen(false);
