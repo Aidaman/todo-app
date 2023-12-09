@@ -5,16 +5,13 @@ import { TodoItemProps } from "../todo-item";
 type TodoEdtiButtonProps = {
   itemId: number | string;
   updateItemProps: TodoItemProps;
-  onUpdate?: (
-    id: number | string,
-    update: TodoItemProps
-  ) => TodoItemProps;
+  onUpdate: (editTodo?: TodoItemProps) => void;
 };
 
 const handleOnUpdate = ({ itemId, onUpdate, updateItemProps }: TodoEdtiButtonProps) => {
   if (!onUpdate) return;
 
-  onUpdate!(itemId, updateItemProps);
+  onUpdate!(updateItemProps);
 }
 
 const TodoEditButton = (props: TodoEdtiButtonProps) => (

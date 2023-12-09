@@ -1,6 +1,6 @@
-import { QueryClient } from "@tanstack/react-query";
-import { CreateTodo } from "../create-todo-box/create-todo-box";
-import { TodoItemProps } from "../todo-item/todo-item";
+import { QueryClient } from "@tanstack/query-core";
+import { CreateTodo } from "../../create-todo-box/create-todo-box";
+import { TodoItemProps } from "../../todo-item/todo-item";
 
 export default class TodoService {
   public static queryClient: QueryClient = new QueryClient();
@@ -13,6 +13,10 @@ export default class TodoService {
     }
 
     return JSON.parse(localstorageTodos);
+  }
+
+  public static getTodo(id: string | number): TodoItemProps | undefined {
+    return this.getTodos().find((x) => x.id === id);
   }
 
   public static addNewTodo(createTodo: CreateTodo): void {
@@ -45,9 +49,21 @@ export default class TodoService {
       isCompleted: false,
       dueTo: new Date(createTodo.todoDueTo ?? ""),
       title: createTodo.todoText,
+      onComplete: (id: string | number) => {},
+      onDelete: (id: string | number) => {},
+      onUpdate: (editTodo?: TodoItemProps) => {},
     };
 
     localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
+  }
+
+  public static editTodo(updatedTodo: TodoItemProps): void {
+    const todos: TodoItemProps[] = this.getTodos();
+    const result: TodoItemProps[] = todos.map((x) =>
+      x.id !== updatedTodo.id ? x : updatedTodo
+    );
+
+    localStorage.setItem("todos", JSON.stringify(result));
   }
 
   public static removeTodo(id: number | string): void {

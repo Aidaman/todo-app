@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
-import CreateTodoBoxTextInput from "./create-todo-box-text-input/create-todo-box-text-input";
-import CreateTodoBoxDateInput from "./create-todo-box-date-input/create-todo-box-date-input";
+import { useState } from "react";
 import CreateTodoBoxConfirmButton from "./create-todo-box-confirm-button/create-todo-box-confirm-button";
+import Input from "../shared/components/input/input";
 
 export type CreateTodo = {
   todoText: string;
@@ -14,7 +13,9 @@ export type UpdateTodo = {
   todoDueTo?: string;
 };
 
-type CreateTodoBoxProps = {};
+type CreateTodoBoxProps = {
+  createTodoClick: (createTodo: CreateTodo) => void;
+};
 
 const CreateTodoBox = (props: CreateTodoBoxProps) => {
   const [todoText, setTodoText] = useState("");
@@ -28,14 +29,21 @@ const CreateTodoBox = (props: CreateTodoBoxProps) => {
     setTodoDueTo(value);
   };
 
+  const handleCreateTodoClick = (createTodoClick: CreateTodo) => {
+    if (!props.createTodoClick) return;
+    
+    props.createTodoClick!(createTodoClick);
+  }
+
   return (
-    <div className="flex w-2/3 mx-auto my-4 gap-2">
-      <CreateTodoBoxTextInput
-        onInput={handleTodoTextChange}
+    <div className="flex flex-col w-2/3 mx-auto my-4 gap-2 md:flex-row">
+      <Input
+        onCustomInput={handleTodoTextChange}
+        type="text"
         placeholder="Task that you need to complete"
       />
-      <CreateTodoBoxDateInput onChange={handleTodoDueToChange} />
-      <CreateTodoBoxConfirmButton createTodo={{todoText, todoDueTo}} />
+      <Input type="date" onCustomInput={handleTodoDueToChange} />
+      <CreateTodoBoxConfirmButton onClick={handleCreateTodoClick} createTodo={{todoText, todoDueTo}} />
     </div>
   );
 };
