@@ -29,14 +29,11 @@ const CreateTodoBox = (props: CreateTodoBoxProps) => {
     setTodoDueTo(value);
   };
 
-  const handleCreateTodoClick = (value: CreateTodo): void => {
-    if (todoText.length === 0 || todoDueTo.length === 0) return;
-
-    props.createTodoClick!({
-      todoText,
-      todoDueTo,
-    });
-  };
+  const handleCreateTodoClick = (createTodoClick: CreateTodo) => {
+    if (!props.createTodoClick) return;
+    
+    props.createTodoClick!(createTodoClick);
+  }
 
   return (
     <div className="flex flex-col w-2/3 mx-auto my-4 gap-2 md:flex-row">

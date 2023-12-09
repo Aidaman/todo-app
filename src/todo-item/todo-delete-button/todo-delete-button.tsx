@@ -1,15 +1,32 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import TodoService from "../../shared/queries/api";
+import { useMutation } from "@tanstack/react-query";
 
 type TodoDeleteButtonProps = {
   itemId: number | string;
-  onDelete: (id: number | string) => void
+  onDelete: (id: number | string) => void;
 };
 
-const TodoDeleteButton = (props: TodoDeleteButtonProps) => (
-  <button className="w-8 h-8 bg-red-600 transition-all hover:bg-red-700 text-gray-50 rounded-full grid place-items-center" onClick={() => props.onDelete(props.itemId)}>
-    <FaRegTrashAlt />
-  </button>
-);
+const TodoDeleteButton = (props: TodoDeleteButtonProps) => {
+  const deleteTodoMutation = useMutation({
+    mutationFn: (itemId: number | string) => new Promise(() => TodoService.removeTodo(itemId)),
+  });
+
+  const handleOnDelete = ({ itemId, onDelete }: TodoDeleteButtonProps) => {
+    // deleteTodoMutation.mutate(itemId);
+
+    onDelete!(itemId);
+  }
+
+  return (
+    <button
+      className="w-8 h-8 bg-red-600 transition-all hover:bg-red-700 text-gray-50 rounded-full grid place-items-center"
+      onClick={() => handleOnDelete(props)}
+    >
+      <FaRegTrashAlt />
+    </button>
+  );
+};
 
 export default TodoDeleteButton;

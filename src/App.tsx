@@ -1,15 +1,27 @@
-import { useState } from "react";
 import "./App.css";
 import CreateTodoBox, { CreateTodo } from "./create-todo-box/create-todo-box";
 import TodoList from "./todo-list/todo-list";
 import TodoService from "./shared/queries/api";
 import EditTodoDialog from "./edit-todo-dialog/edit-todo-dialog";
 import { TodoItemProps } from "./todo-item/todo-item";
+import React, { useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import TodoListEmpty from "./todo-list/todo-list-empty/todo-list-empty";
 
 function App() {
   const [todos, setTodos] = useState(TodoService.getTodos());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editTodo, setEditTodo] = useState(TodoService.getTodo(0));
+
+  const { isError, isLoading, data } = useQuery({
+    queryKey: ["todos"],
+    queryFn: TodoService.getTodos,
+  });
+
+  // When we rejecting update changes we does not mutate anything, so no need for mutation for this case 
+  const updateConfirmMutation = useMutation({
+    mutationFn: (updateTodo: TodoItemProps) => new Promise(() => updateConfirm(updateTodo)),
+  });
 
   const addNewTodo = (createTodo: CreateTodo) => {
     TodoService.addNewTodo(createTodo);
@@ -32,6 +44,7 @@ function App() {
   };
 
   const updateConfirm = (updatedTodo: TodoItemProps) => {
+    // updateConfirmMutation.mutate(updatedTodo);
     TodoService.editTodo(updatedTodo);
     setTodos(TodoService.getTodos());
     setIsDialogOpen(false);
@@ -46,7 +59,18 @@ function App() {
   return (
     <div className="relative h-full">
       <CreateTodoBox createTodoClick={addNewTodo} />
-      <TodoList todos={todos} onDelete={removeTodo} onComplete={completeTodo} onUpdate={openEditDialog} />
+      {isLoading ? (
+        <TodoListEmpty message={"Loading..."} />
+      ) : isError ? (
+        <TodoListEmpty message={"Something went wrong ¬_¬"} />
+      ) : (
+        <TodoList
+          onComplete={completeTodo}
+          onDelete={removeTodo}
+          onUpdate={openEditDialog}
+          todos={todos}
+        />
+      )}
       <EditTodoDialog
         isShown={isDialogOpen}
         initialValue={editTodo}

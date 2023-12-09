@@ -1,7 +1,10 @@
+import { QueryClient } from "@tanstack/query-core";
 import { CreateTodo } from "../../create-todo-box/create-todo-box";
 import { TodoItemProps } from "../../todo-item/todo-item";
 
 export default class TodoService {
+  public static queryClient: QueryClient = new QueryClient();
+
   public static getTodos(): TodoItemProps[] {
     const localstorageTodos: string | null = localStorage.getItem("todos");
     if (!localstorageTodos) {
