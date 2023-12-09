@@ -15,7 +15,7 @@ const CreateTodoBoxDateInput = (props: CreateTodoBoxDateInputProps) => {
   return (
     <input
       required
-      className="px-4 py-1 bg-gray-100 w-1/3 rounded-xl transition-all hover:shadow-md"
+      className="px-4 py-1 bg-gray-100 lg:w-1/3 rounded-xl transition-all hover:shadow-md sm:w-full"
       type="date"
       onInput={handleInput}
     />

@@ -39,7 +39,11 @@ const EditTodoDialog = (props: EditTodoDialogProps) => {
   }
 
   return (
-    <div className="absolute px-8 py-8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neutral-50 drop-shadow-xl rounded-xl w-1/2 flex flex-col align-middle justify-center gap-4">
+    <>
+    <div className="overaly absolute top-0 left-0 w-full h-full z-1 bg-gray-700 opacity-10" onClick={() => props.onUpdateReject()}>
+
+    </div>
+    <div className="absolute z-2 w-4/5 sm:w-1/2 px-8 py-8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neutral-50 drop-shadow-2xl rounded-xl flex flex-col align-middle justify-center gap-4">
       <EditTodoDialogTextInput
         onInput={handleTextInput}
         initialValue={props.initialValue?.title}
@@ -62,6 +66,7 @@ const EditTodoDialog = (props: EditTodoDialogProps) => {
         />
       </div>
     </div>
+    </>
   );
 };
 

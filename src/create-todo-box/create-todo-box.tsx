@@ -40,7 +40,7 @@ const CreateTodoBox = (props: Props) => {
   };
 
   return (
-    <div className="flex w-2/3 mx-auto my-4 gap-2">
+    <div className="flex flex-col w-2/3 mx-auto my-4 gap-2 md:flex-row">
       <CreateTodoBoxTextInput
         onInput={handleTodoTextChange}
         placeholder="Task that you need to complete"
