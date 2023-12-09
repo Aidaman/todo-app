@@ -1,5 +1,5 @@
-import { CreateTodo } from "../create-todo-box/create-todo-box";
-import { TodoItemProps } from "../todo-item/todo-item";
+import { CreateTodo } from "../../create-todo-box/create-todo-box";
+import { TodoItemProps } from "../../todo-item/todo-item";
 
 export default class TodoService {
   public static getTodos(): TodoItemProps[] {
